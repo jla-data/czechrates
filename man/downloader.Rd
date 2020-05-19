@@ -11,6 +11,9 @@ downloader(year, verbose = FALSE)
 
 \item{verbose}{should progress messages be displayed? Default is not.}
 }
+\value{
+data frame of annual pribor & pribid rates
+}
 \description{
 Internal function - generic downloader of raw data from www.cnb.cz
 }

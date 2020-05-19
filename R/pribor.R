@@ -1,5 +1,4 @@
-
-#' Pribor
+#' pribor
 #'
 #' A function returning data frame of PRIBOR rates.
 #'
@@ -8,6 +7,8 @@
 #' PRIBOR rates are reported as fractions, i.e. not as percentages (1% = .01).
 #'
 #' For dates when no PRIBOR was quoted (e.g. Bank Holidays, such as December 24th on any year, or August 13th, 2002 when no PRIBOR was quoted due to catastrophic floods) no result will be returned.
+#'
+#' @name pribor
 #'
 #' @param date Date of fixing as date, default is yesterday.
 #' @param maturity Maturity of loan as string, default is overnight ("1D").
@@ -20,6 +21,11 @@
 #'
 #' @examples pribor(as.Date("2002-08-12"))
 #'
+#'
+#'
+
+globalVariables("date_valid")
+
 pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
 
   # a quick reality check:
