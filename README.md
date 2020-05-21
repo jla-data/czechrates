@@ -1,16 +1,19 @@
-
 # czechrates
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.com/jla-data/czechrates.svg?branch=master)](https://travis-ci.com/jla-data/czechrates)
+[![Coveralls test coverage](https://coveralls.io/repos/github/jla-data/czechrates/badge.svg)](https://coveralls.io/r/jla-data/czechrates?branch=master)
 <!-- badges: end -->
 
-The package currently contains a single function: `czechrates::pribor()`. 
+The PRIBOR rates are provided by Czech National Bank as a courtesy of the Czech Financial Benchmark Facility s.r.o., the benchmark administrator of the PRIBOR benchmark.
 
-The function returns values of the [Prague Interbank Offered Rate](https://en.wikipedia.org/wiki/Prague_interbank_offered_rate) as quoted on internet pages of the [Czech National Bank](https://www.cnb.cz/en/financial-markets/money-market/pribor/fixing-of-interest-rates-on-interbank-deposits-pribor/). 
+The rates can be accessed for internal purposes free of charge via internet pages of ČNB - https://www.cnb.cz/en/financial-markets/money-market/pribor/format-of-the-pribor-rate-on-the-cnb-website/
 
-A working internet connection is therefore required to use the package.
+The package `{czechrates}` provides a convenient way to access the information stored on the ČNB site from the comfort of your R session. It does not store the rates (this would be against the terms of use, and the data would get stale rather soon). As a consequence a working internet connection is required to use the package.
 
 <hr>
+
+The package currently contains a single function: `czechrates::pribor()`. 
 
 The `pribor()` function has two parameters:
 
@@ -21,7 +24,7 @@ The `pribor()` function has two parameters:
 
 ## Installation
 
-`czechrates` is currently not on CRAN (and is uncertain to ever be). 
+`czechrates` is currently not on CRAN. 
 
 You are welcome to install it from GitHub by running:
 
@@ -37,10 +40,23 @@ A simple example:
 library(czechrates)
 
 pribor() # overnight PRIBOR for yesterday
+# A tibble: 1 x 2
+  date_valid PRIBOR_1D
+  <date>         <dbl>
+1 2020-05-20    0.0025
 
 pribor(as.Date("2020-04-01")) # overnight PRIBOR for April 1st, 2020
+# A tibble: 1 x 2
+  date_valid PRIBOR_1D
+  <date>         <dbl>
+1 2020-04-01    0.0101
 
-pribor(as.Date("2020-04-01"), "1W") # weekly PRIBOR for April 1st, 2020
+pribor(as.Date("2020-04-01"), c("1W", "1M")) # weekly and monthly PRIBOR for April 1st, 2020
+# A tibble: 1 x 3
+  date_valid PRIBOR_1W PRIBOR_1M
+  <date>         <dbl>     <dbl>
+1 2020-04-01    0.0102      1.04
+
 ```
 
 A graphic example:

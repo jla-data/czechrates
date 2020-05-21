@@ -30,7 +30,7 @@ pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
 
   # a quick reality check:
   if(!inherits(date, "Date")) stop("'date' parameter expected as a Date data type!")
-  if(!is.element(maturity, c("1D", "1W", "2W", "1M", "3M", "6M", "9M", "1Y"))) stop(paste0("'", maturity, "' is not a recognized maturity abbreviation!"))
+  if(!all(maturity %in% c("1D", "1W", "2W", "1M", "3M", "6M", "9M", "1Y"))) stop(paste0("'", maturity, "' is not a recognized maturity abbreviation!"))
 
   roky <- format(date, "%Y") %>%
     unique()

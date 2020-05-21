@@ -1,11 +1,13 @@
 Package: czechrates
 Type: Package
-Title: Prague Bid & Offer Rates
-Version: 0.1.0
-Date: 2020-05-19
+Title: Prague Offered Rates
+Version: 0.1.5
+Date: 2020-05-21
 Author: Jindra Lacko
 Maintainer: Jindra Lacko <jindra.lacko@gmail.com>
-Description: Interface to PRIBID / PRIBOR rates as published by CNB.
+Description: Interface to PRIBOR rates as published by the Czech National Bank.
+URL: https://github.com/jla-data/czechrates
+BugReports: https://github.com/jla-data/czechrates/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,6 +17,11 @@ Imports:
   readr,
   dplyr,
   magrittr
-RoxygenNote: 7.1.0
 Suggests: 
-    testthat
+    testthat,
+    ggplot2,
+    scales,
+    knitr,
+    covr
+RoxygenNote: 7.1.0
+VignetteBuilder: knitr

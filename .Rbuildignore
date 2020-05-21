@@ -3,3 +3,7 @@
 ^LICENSE\.md$
 ^img\*
 ^img$
+cran-comments.md
+pre-submission.R
+^CRAN-RELEASE$
+^\.travis\.yml$
