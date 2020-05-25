@@ -16,6 +16,7 @@ test_that("data format", {
 
 test_that("known values", {
   expect_equal(pribor(as.Date("1997-05-29"))$PRIBOR_1D, 194.38  / 100)
-  expect_equal(pribor(as.Date("1997-05-29"), "1W")$PRIBOR_1W, 85.63 / 100)
+  expect_equal(pribor(as.Date("1997-05-29"), c("1D", "1W"))$PRIBOR_1W, 85.63 / 100)
+#  expect_equal(pribor()$date_valid, Sys.Date() - 1)
 })
 

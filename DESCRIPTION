@@ -1,11 +1,11 @@
 Package: czechrates
 Type: Package
 Title: Czech Interest Rates
-Version: 0.1.5
+Version: 0.1.6
 Date: 2020-05-21
 Author: Jindra Lacko
 Maintainer: Jindra Lacko <jindra.lacko@gmail.com>
-Description: Interface to PRIBOR rates as published by the Czech National Bank.
+Description: Interface to interest rates as published by the Czech National Bank.
 URL: https://github.com/jla-data/czechrates
 BugReports: https://github.com/jla-data/czechrates/issues
 License: MIT + file LICENSE

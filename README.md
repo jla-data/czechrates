@@ -9,17 +9,23 @@ The PRIBOR rates are provided by Czech National Bank as a courtesy of the Czech 
 
 The rates can be accessed for internal purposes free of charge via internet pages of ČNB - https://www.cnb.cz/en/financial-markets/money-market/pribor/format-of-the-pribor-rate-on-the-cnb-website/
 
+The bi-weekly repo rate is announced by ČNB and also published on the ČNB internet.
+
 The package `{czechrates}` provides a convenient way to access the information stored on the ČNB site from the comfort of your R session. It does not store the rates (this would be against the terms of use, and the data would get stale rather soon). As a consequence a working internet connection is required to use the package.
 
 <hr>
 
-The package currently contains a single function: `czechrates::pribor()`. 
+The package currently contains a two functions: `czechrates::pribor()` and `czechrates::repo2w()`
 
 The `pribor()` function has two parameters:
 
 - `date` = date valid for the PRIBOR rate; default is yesterday (`Sys.Date() - 1`)
 
 - `maturity` = tenor of the PRIBOR rate; quoted as one of the standard maturities: 1D (overnight = default), 1W (weekly) and 1M, 2M, 3M, 6M, 9M and 1Y.
+
+The `repo2wr()` function has only a single parameter (as the maturity is two weeks by definition):
+
+- `date` = date valid for the bi weekly repo rate; default is yesterday (`Sys.Date() - 1`)
 
 
 ## Installation

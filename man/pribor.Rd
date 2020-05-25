@@ -3,6 +3,9 @@
 \name{pribor}
 \alias{pribor}
 \title{pribor}
+\usage{
+pribor(date = Sys.Date() - 1, maturity = "1D")
+}
 \arguments{
 \item{date}{Date of fixing as date, default is yesterday.}
 
@@ -23,7 +26,5 @@ For dates when no PRIBOR was quoted (e.g. Bank Holidays, such as December 24th o
 }
 \examples{
 pribor(as.Date("2002-08-12"), "1D")
-
-
 
 }
