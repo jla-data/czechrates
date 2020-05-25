@@ -19,7 +19,7 @@
 #'
 #' @importFrom magrittr %>%
 #'
-#' @examples pribor(as.Date("2002-08-12"))
+#' @examples pribor(as.Date("2002-08-12"), "1D")
 #'
 #'
 #'
