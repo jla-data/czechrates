@@ -6,6 +6,18 @@ test_that("expected input failures", {
   expect_error(pribor(as.Date("2020-04-01"), c("1D", "asdf"))) # není platná maturita
 })
 
+test_that("network failures", {
+
+  Sys.setenv("NETWORK_UP" = FALSE)
+  expect_message(pribor(), "internet") # zpráva o chybějícím internetu
+  Sys.setenv("NETWORK_UP" = TRUE)
+
+  Sys.setenv("CNB_UP" = FALSE)
+  expect_message(pribor(), "source") # zpráva o spadlé ČNB
+  Sys.setenv("CNB_UP" = TRUE)
+
+})
+
 test_that("data format", {
   expect_true(is.data.frame(pribor()))
   expect_true(inherits(pull(pribor(), 1), "Date"))
