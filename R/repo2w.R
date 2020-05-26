@@ -54,12 +54,20 @@ repo2w <- function(date = Sys.Date() - 1) {
                                 )
 
   res <- local_df %>%
-    dplyr::mutate(valid_to = dplyr::lead(valid_from, 1, default = Sys.Date())) %>%
-    dplyr::filter(valid_to >= date & valid_from < date) %>%
-    dplyr::mutate(date_valid = date) %>%
-    dplyr::mutate_at(dplyr::vars(2),  ~ . / 100) %>%
-    dplyr::select(4, 2)
+    dplyr::mutate(valid_to = dplyr::lead(valid_from, 1, default = Sys.Date()),
+                  fake = 1)
+
+  calendar <- data.frame(date_valid = seq(min(res$valid_from), max(res$valid_to), by = 1),
+                         fake = 1)
+
+  res <- dplyr::full_join(calendar, res, by = "fake") %>%
+    dplyr::select(-fake) %>%
+    dplyr::filter(valid_to >= date_valid & valid_from < date_valid) %>%
+    dplyr::filter(date_valid %in% date) %>%
+    dplyr::mutate_at(dplyr::vars(3),  ~ . / 100) %>%
+    dplyr::select(1, 3)
 
   res #
 
 }
+

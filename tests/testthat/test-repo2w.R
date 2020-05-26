@@ -23,6 +23,9 @@ test_that("data format", {
   expect_true(inherits(pull(repo2w(), 1), "Date"))
   expect_true(inherits(pull(repo2w(), 2), "numeric"))
   expect_equal(ncol(repo2w()), 2)
+  expect_equal(nrow(repo2w(seq(from = as.Date("2020-02-24"),
+                               to   = as.Date("2020-02-28"),
+                               by = 1))), 5)
 })
 
 test_that("known values", {

@@ -24,6 +24,9 @@ test_that("data format", {
   expect_true(inherits(pull(pribor(), 2), "numeric"))
   expect_equal(ncol(pribor()), 2)
   expect_equal(ncol(pribor(as.Date("2020-05-19"), c("1D", "1W"))), 3)
+  expect_equal(nrow(pribor(seq(from = as.Date("2020-02-24"),
+                               to   = as.Date("2020-02-28"),
+                               by = 1))), 5)
 })
 
 test_that("known values", {

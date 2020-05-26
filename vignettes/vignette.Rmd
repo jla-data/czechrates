@@ -57,17 +57,38 @@ library(czechrates)
 library(ggplot2)
 library(scales)
 
-chart_src <- pribor(seq(from = as.Date("1997-05-01"), 
-                        to   = as.Date("1997-06-30"),
-                        by = 1))
+offered_rate <- pribor(seq(from = as.Date("1997-05-01"), 
+                           to   = as.Date("1997-06-30"),
+                           by = 1))
 
-ggplot(data = chart_src, aes(x = date_valid, y = PRIBOR_1D)) +
+ggplot(data = offered_rate, aes(x = date_valid, y = PRIBOR_1D)) +
   geom_line(color = "red", size = 1.25) +
   scale_x_date(date_labels = "%d.%m.%Y") +
   scale_y_continuous(labels = percent_format()) +
   theme_bw() +
   labs(title = "A ghost of rates past...",
        y = "Overnight PRIBOR (per annum basis)") +
+  theme(axis.title.x = element_blank())
+
+```
+To ilustrate the development of the main policy rate – i.e. `czechrates::repo2w()` – we can consider a more recent history:
+
+```{r recent-development}
+library(czechrates)
+library(ggplot2)
+library(scales)
+
+policy_rate <- repo2w(seq(from = as.Date("2020-01-01"), 
+                          to   = as.Date("2020-05-31"),
+                          by = 1))
+
+ggplot(data = policy_rate, aes(x = date_valid, y = REPO_2W)) +
+  geom_line(color = "red", size = 1.25) +
+  scale_x_date(date_labels = "%d.%m.%Y") +
+  scale_y_continuous(labels = percent_format()) +
+  theme_bw() +
+  labs(title = "COVID-19 impact on CZK policy rate",
+       y = "ČNB REPO rate (per annum basis)") +
   theme(axis.title.x = element_blank())
 
 ```

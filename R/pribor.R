@@ -47,13 +47,7 @@ pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
 
   sazba <- paste0("PRIBOR_", maturity)
 
-  res <- lapply(roky, downloader)
-
-  if(is.null(res)) {
-    return(NULL) # downloader exited with a failure
-  }
-
-  res <- res %>%
+  res <- lapply(roky, downloader) %>%
     dplyr::bind_rows() %>%
     dplyr::filter(date_valid %in% date) %>%
     dplyr::select(date_valid, !! sazba) %>%
