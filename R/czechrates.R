@@ -1,6 +1,6 @@
 #' czechrates: Czech Interest Rates
 #'
-#' Interface to interest rates as published by the Czech National Bank
+#' Interface to interest rates as published by the Czech National Bank.
 #'
 #'
 #' @docType package

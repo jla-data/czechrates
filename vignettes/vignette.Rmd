@@ -33,10 +33,10 @@ The `pribor()` function has two parameters:
 ```{r static, message = F}
 library(czechrates)
 
-# relying on default for both date and tenor
+# PRIBOR: relying on default for both date and tenor
 pribor() 
 
-# specific date, default tenor
+# PRIBOR: specific date, default tenor
 pribor(as.Date("2020-05-20")) 
 
 # three specific dates + a specific tenor (weekly rate)
@@ -45,8 +45,14 @@ three_dates
 
 pribor(three_dates, "1W")
 
-# four rates for a single date
+# PRIBOR: four rates for a single date
 pribor(as.Date("2020-05-20"), c("1D", "1W", "1M", "1Y")) 
+
+# two-week REPO rate for yesterday
+repo2w()
+
+# two-week REPO rate for three specific dates (as defined above)
+repo2w(three_dates)
 
 ```
 

@@ -15,14 +15,14 @@ pribor(date = Sys.Date() - 1, maturity = "1D")
 data frame - first column is date, second is relevant PRIBOR rate.
 }
 \description{
-A function returning data frame of PRIBOR rates.
+A function returning data frame of PRague InterBank OffeRed rates (PRIBOR).
 }
 \details{
-The function expects date input, and returns data frame of two columns - date, and relevant PRIBOR rate (as determined by `maturity` parameter).
+The function expects date input, and returns data frame of two or more columns - date, and relevant PRIBOR rate (as determined by `maturity` parameter).
 
-PRIBOR rates are reported as fractions, i.e. not as percentages (1% = .01).
+PRIBOR rates are reported as fractions, i.e. not as percentages (i.e. 1% is reported as .01, not 1).
 
-For dates when no PRIBOR was quoted (e.g. Bank Holidays, such as December 24th on any year, or August 13th, 2002 when no PRIBOR was quoted due to catastrophic floods) no result will be returned.
+For dates when no PRIBOR was quoted (e.g. weekends, Bank Holidays, such as December 24th on any year, or August 13th, 2002 when no PRIBOR was quoted due to catastrophic floods) no result will be returned.
 }
 \examples{
 pribor(as.Date("2002-08-12"), "1D")

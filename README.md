@@ -5,11 +5,9 @@
 [![Coveralls test coverage](https://coveralls.io/repos/github/jla-data/czechrates/badge.svg)](https://coveralls.io/r/jla-data/czechrates?branch=master)
 <!-- badges: end -->
 
-The PRIBOR rates are provided by Czech National Bank as a courtesy of the Czech Financial Benchmark Facility s.r.o., the benchmark administrator of the PRIBOR benchmark.
+The PRague InterBank Offered Rates (PRIBOR - the CZK member of the broader IBOR family) are provided by the Czech National Bank as a courtesy of the Czech Financial Benchmark Facility s.r.o., the benchmark administrator of the PRIBOR benchmark. The rates can be accessed for internal purposes free of charge via internet pages of ČNB – https://www.cnb.cz/en/financial-markets/money-market/pribor/format-of-the-pribor-rate-on-the-cnb-website/
 
-The rates can be accessed for internal purposes free of charge via internet pages of ČNB - https://www.cnb.cz/en/financial-markets/money-market/pribor/format-of-the-pribor-rate-on-the-cnb-website/
-
-The bi-weekly repo rate is announced by ČNB and also published on the ČNB internet.
+The two-week repo rate (a key policy rate) is formally announced by ČNB and also published on the ČNB internet – https://www.cnb.cz/en/faq/How-has-the-CNB-two-week-repo-rate-changed-over-time/ 
 
 The package `{czechrates}` provides a convenient way to access the information stored on the ČNB site from the comfort of your R session. It does not store the rates (this would be against the terms of use, and the data would get stale rather soon). As a consequence a working internet connection is required to use the package.
 
@@ -25,7 +23,7 @@ The `pribor()` function has two parameters:
 
 The `repo2wr()` function has only a single parameter (as the maturity is two weeks by definition):
 
-- `date` = date valid for the bi weekly repo rate; default is yesterday (`Sys.Date() - 1`)
+- `date` = date valid for the two-week repo rate; default is yesterday (`Sys.Date() - 1`)
 
 
 ## Installation
@@ -49,7 +47,7 @@ pribor() # overnight PRIBOR for yesterday
 # A tibble: 1 x 2
   date_valid PRIBOR_1D
   <date>         <dbl>
-1 2020-05-20    0.0025
+1 2020-05-26    0.0025
 
 pribor(as.Date("2020-04-01")) # overnight PRIBOR for April 1st, 2020
 # A tibble: 1 x 2
@@ -61,8 +59,19 @@ pribor(as.Date("2020-04-01"), c("1W", "1M")) # weekly and monthly PRIBOR for Apr
 # A tibble: 1 x 3
   date_valid PRIBOR_1W PRIBOR_1M
   <date>         <dbl>     <dbl>
-1 2020-04-01    0.0102      1.04
+1 2020-04-01    0.0102    0.0104
 
+repo2w() # two-week REPO rate for yesterday
+# A tibble: 1 x 2
+  date_valid REPO_2W
+  <date>       <dbl>
+1 2020-05-26  0.0025
+
+repo2w(as.Date("2020-04-01")) # two-week repo rate for April 1st, 2020
+# A tibble: 1 x 2
+  date_valid REPO_2W
+  <date>       <dbl>
+1 2020-04-01    0.01
 ```
 
 A graphic example:

@@ -2,7 +2,7 @@
 % Please edit documentation in R/repo2w.R
 \name{repo2w}
 \alias{repo2w}
-\title{Bi-weekly Repo Rate}
+\title{Two-week Repo Rate}
 \usage{
 repo2w(date = Sys.Date() - 1)
 }
@@ -10,15 +10,15 @@ repo2w(date = Sys.Date() - 1)
 \item{date}{Date of fixing as date, default is yesterday.}
 }
 \value{
-data frame - first column is date, second is relevant bi-weekly repo rate.
+data frame - first column is date, second is relevant two-week repo rate (the primary CZK policy rate)
 }
 \description{
-A function returning data frame of bi-weekly repo rate, as set by ČNB.
+A function returning data frame of two-week repo rate, as set by ČNB.
 }
 \details{
 The function expects date input, and returns data frame of two columns - date, and relevant repo rate. It does not require maturity argument, as maturity is by definition 2W.
 
-Repo rates are reported as fractions, i.e. not as percentages (1% = .01).
+Repo rates are reported as fractions, i.e. not as percentages (i.e. 1% is reported as .01, not 1).
 
 A single result will be reported for all dates higher than December 8th, 1995.
 }

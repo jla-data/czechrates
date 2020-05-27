@@ -1,16 +1,16 @@
-#' Bi-weekly Repo Rate
+#' Two-week Repo Rate
 #'
-#' A function returning data frame of bi-weekly repo rate, as set by ČNB.
+#' A function returning data frame of two-week repo rate, as set by ČNB.
 #'
 #' The function expects date input, and returns data frame of two columns - date, and relevant repo rate. It does not require maturity argument, as maturity is by definition 2W.
 #'
-#' Repo rates are reported as fractions, i.e. not as percentages (1% = .01).
+#' Repo rates are reported as fractions, i.e. not as percentages (i.e. 1% is reported as .01, not 1).
 #'
 #' A single result will be reported for all dates higher than December 8th, 1995.
 #'
 #' @param date Date of fixing as date, default is yesterday.
 #'
-#' @return data frame - first column is date, second is relevant bi-weekly repo rate.
+#' @return data frame - first column is date, second is relevant two-week repo rate (the primary CZK policy rate)
 #' @export
 #'
 #' @examples repo2w(as.Date("2002-08-12"))
@@ -58,7 +58,8 @@ repo2w <- function(date = Sys.Date() - 1) {
                   fake = 1)
 
   calendar <- data.frame(date_valid = seq(min(res$valid_from), max(res$valid_to), by = 1),
-                         fake = 1)
+                         fake = 1) %>%
+    tibble::as_tibble()
 
   res <- dplyr::full_join(calendar, res, by = "fake") %>%
     dplyr::select(-fake) %>%
