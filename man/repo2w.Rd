@@ -18,7 +18,7 @@ A function returning data frame of two-week repo rate, as set by ČNB.
 \details{
 The function expects date input, and returns data frame of two columns - date, and relevant repo rate. It does not require maturity argument, as maturity is by definition 2W.
 
-Repo rates are reported as fractions, i.e. not as percentages (i.e. 1% is reported as .01, not 1).
+Repo rates are reported as fractions, i.e. not as percentages (i.e. 1\% is reported as .01, not 1).
 
 A single result will be reported for all dates higher than December 8th, 1995.
 }

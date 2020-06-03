@@ -10,11 +10,11 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(collapse = T, fig.align="center", dpi = 150, out.width = "100%", fig.width = 8, fig.height = 4)
+knitr::opts_chunk$set(collapse = T, fig.align="center", dpi = 150, out.width = "100%", fig.width = 8, fig.height = 4, message = F)
 ```
 
 
-# PRIBOR - PRague InterBank Offered Rate
+## PRIBOR - PRague InterBank Offered Rate
 
 The PRIBOR rates are provided by ČNB as a courtesy of the Czech Financial Benchmark Facility s.r.o., the benchmark administrator of the PRIBOR benchmark.
 
@@ -22,15 +22,13 @@ The rates can be accessed for internal purposes free of charge via internet page
 
 The package `{czechrates}` provides a convenient way to access the information stored on the ČNB site from the comfort of your R session. It does not store the rates (this would be against the terms of use, and the data would get stale rather soon). As a consequence a working internet connection is required to use the package.
 
-The package currently contains a single function: `czechrates::pribor()`. 
-
-The `pribor()` function has two parameters:
+The `czechrates::pribor()` function has two parameters:
 
 - `date` = date valid for the PRIBOR rate; default is yesterday (`Sys.Date() - 1`)
 
 - `maturity` = tenor of the PRIBOR rate; quoted as one of the standard maturities: 1D (overnight = default), 1W (weekly) and 1M, 2M, 3M, 6M, 9M and 1Y.
 
-```{r static, message = F}
+```{r repo}
 library(czechrates)
 
 # PRIBOR: relying on default for both date and tenor
@@ -48,11 +46,6 @@ pribor(three_dates, "1W")
 # PRIBOR: four rates for a single date
 pribor(as.Date("2020-05-20"), c("1D", "1W", "1M", "1Y")) 
 
-# two-week REPO rate for yesterday
-repo2w()
-
-# two-week REPO rate for three specific dates (as defined above)
-repo2w(three_dates)
 
 ```
 
@@ -77,6 +70,24 @@ ggplot(data = offered_rate, aes(x = date_valid, y = PRIBOR_1D)) +
   theme(axis.title.x = element_blank())
 
 ```
+
+## Two-week Repo Rate
+
+The two-week repo rate (a key policy rate) is set directly by ČNB and also published on the ČNB internet – https://www.cnb.cz/en/faq/How-has-the-CNB-two-week-repo-rate-changed-over-time/ 
+
+The `czechrates::repo2w()` function has but a single parameter (as maturity is by definition two weeks):
+
+- `date` = date valid for the two2week repo rate; default is yesterday (`Sys.Date() - 1`)
+
+```{r repo-rate}
+# two-week REPO rate for yesterday
+repo2w()
+
+# two-week REPO rate for three specific dates (as defined in the PRIBOR section)
+repo2w(three_dates)
+
+```
+
 To ilustrate the development of the main policy rate – i.e. `czechrates::repo2w()` – we can consider a more recent history:
 
 ```{r recent-development}
