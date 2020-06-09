@@ -29,9 +29,13 @@ The `repo2wr()` function has only a single parameter (as the maturity is two wee
 
 ## Installation
 
-`czechrates` is currently not on CRAN. 
+`czechrates` is on CRAN since June 2020; to install a stable version run:
 
-You are welcome to install it from GitHub by running:
+``` r
+install.packages("czechrates")
+```
+
+You are welcome to install the latest development version from GitHub by running:
 
 ``` r
 remotes::install_github("jla-data/czechrates")
