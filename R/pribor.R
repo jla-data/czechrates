@@ -33,7 +33,7 @@ pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
     return(NULL)
   }
 
-  if (httr::http_error("https://www.cnb.cz/en/financial-markets/money-market/pribor/fixing-of-interest-rates-on-interbank-deposits-pribor/year.txt") | !cnb) { # ČNB website down
+  if (httr::http_error("https://www.cnb.cz/en/financial-markets/money-market/pribor/fixing-of-interest-rates-on-interbank-deposits-pribor/year.txt") | !cnb) { # CNB website down
     message("Data source broken.")
     return(NULL)
   }
