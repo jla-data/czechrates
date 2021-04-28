@@ -108,6 +108,8 @@ downloader <- function(year) {
                                 )
   )
 
+  attr(local_df, 'spec') <- NULL
+
   local_df
 } # /function
 

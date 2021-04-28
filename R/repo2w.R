@@ -43,14 +43,14 @@ repo2w <- function(date = Sys.Date() - 1) {
 
   local_df <- readr::read_delim(local_file,
                                 delim = "|", skip = 2,
+                                locale = readr::locale(decimal_mark = ','),
                                 col_names = c(
                                   "valid_from", "REPO_2W"
                                 ),
                                 col_types = readr::cols(
                                   valid_from = readr::col_date(format = "%Y%m%d"),
                                   REPO_2W = readr::col_double()
-                                  ),
-                                locale = readr::locale(decimal_mark = ',')
+                                  )
                                 )
 
   res <- local_df %>%
@@ -67,6 +67,8 @@ repo2w <- function(date = Sys.Date() - 1) {
     dplyr::filter(date_valid %in% date) %>%
     dplyr::mutate_at(dplyr::vars(3),  ~ . / 100) %>%
     dplyr::select(1, 3)
+
+  attr(res, 'spec') <- NULL
 
   res #
 

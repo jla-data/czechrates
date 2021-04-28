@@ -1,6 +1,6 @@
 #' czechrates: Czech Interest Rates
 #'
-#' Interface to interest rates as published by the Czech National Bank.
+#' Interface to interest and FX rates as published by the Czech National Bank.
 #'
 #'
 #' @docType package
@@ -8,4 +8,5 @@
 #' @keywords internal
 #' @importFrom magrittr %>%
 
-globalVariables(names = c("date_valid", "valid_from", "valid_to", "fake"))
+globalVariables(names = c("date_valid", "valid_from", "valid_to", "fake", "currency"))
+

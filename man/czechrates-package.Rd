@@ -5,6 +5,6 @@
 \alias{czechrates-package}
 \title{czechrates: Czech Interest Rates}
 \description{
-Interface to interest rates as published by the Czech National Bank.
+Interface to interest and FX rates as published by the Czech National Bank.
 }
 \keyword{internal}
