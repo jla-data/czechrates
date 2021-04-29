@@ -17,16 +17,9 @@
 cnbfxrate <- function(date = Sys.Date() - 1,
                       currency_code = "ALL") {
 
-  network <- as.logical(Sys.getenv("NETWORK_UP", unset = TRUE)) # dummy variable to allow testing of network
   cnb <- as.logical(Sys.getenv("CNB_UP", unset = TRUE)) # dummy variable to allow testing of network
 
-
-  if (!curl::has_internet() | !network) { # network is down
-    message("No internet connection.")
-    return(NULL)
-  }
-
-  if (httr::http_error("https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/") | !cnb) { # CNB website down
+  if (!ok_to_proceed("https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/") | !cnb) { # CNB website down
     message("Data source broken.")
     return(NULL)
   }
@@ -37,22 +30,22 @@ cnbfxrate <- function(date = Sys.Date() - 1,
   datumy <- date %>%
     unique()
 
-  res <- lapply(datumy, downloader) %>%
+  res <- lapply(datumy, dnl_fx) %>%
     dplyr::bind_rows() %>%
     dplyr::relocate(date_valid)
 
   # single currency, or entire list?
   if(currency_code != "ALL") {
-    res <- res %>%
-      dplyr::filter(currency  == currency_code)
+
+    res <- subset(res, currency  == currency_code)
   }
 
-  res
+    res
 
 }
 
 # downloader - a helper function to be l-applied
-downloader <- function(datum = as.Date("2021-04-23")) {
+dnl_fx <- function(datum = as.Date("2021-04-23")) {
 
   remote_path <- "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt?date=" # remote archive
   remote_file <- paste0(remote_path, as.character(datum, "%d.%m.%Y")) # path to ČNB source data
@@ -62,6 +55,7 @@ downloader <- function(datum = as.Date("2021-04-23")) {
 
     # proceed to download via curl
     curl::curl_download(url = remote_file, destfile = local_file, quiet = T)
+    Sys.sleep(1/1000) # maličký timeout aby se soubor uložil
   } # /if - local file exists
 
   local_df <- readr::read_delim(local_file,

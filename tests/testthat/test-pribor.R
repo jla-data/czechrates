@@ -8,10 +8,6 @@ test_that("expected input failures", {
 
 test_that("network failures", {
 
-  Sys.setenv("NETWORK_UP" = FALSE)
-  expect_message(pribor(), "internet") # zpráva o chybějícím internetu
-  Sys.setenv("NETWORK_UP" = TRUE)
-
   Sys.setenv("CNB_UP" = FALSE)
   expect_message(pribor(), "source") # zpráva o spadlé ČNB
   Sys.setenv("CNB_UP" = TRUE)
@@ -32,6 +28,5 @@ test_that("data format", {
 test_that("known values", {
   expect_equal(pribor(as.Date("1997-05-29"))$PRIBOR_1D, 194.38  / 100)
   expect_equal(pribor(as.Date("1997-05-29"), c("1D", "1W"))$PRIBOR_1W, 85.63 / 100)
-#  expect_equal(pribor()$date_valid, Sys.Date() - 1)
 })
 

@@ -20,19 +20,13 @@ repo2w <- function(date = Sys.Date() - 1) {
   # a quick reality check:
   if(!inherits(date, "Date")) stop("'date' parameter expected as a Date data type!")
 
-  network <- as.logical(Sys.getenv("NETWORK_UP", unset = TRUE)) # dummy variable to allow testing of network
   cnb <- as.logical(Sys.getenv("CNB_UP", unset = TRUE)) # dummy variable to allow testing of network
 
   remote_file <- "https://www.cnb.cz/cs/casto-kladene-dotazy/.galleries/vyvoj_repo_historie.txt" # path to CNB source data
   local_file <- file.path(tempdir(), "vyvoj_repo_historie.txt") # local file - in tempdir
 
   if (!file.exists(local_file)) {
-    if (!curl::has_internet() | !network) { # network is down
-      message("No internet connection.")
-      return(NULL)
-    }
-
-    if (httr::http_error(remote_file) | !cnb) { # CNB website down
+    if (!ok_to_proceed(remote_file) | !cnb) { # CNB website down
       message("Data source broken.")
       return(NULL)
     }

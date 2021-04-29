@@ -4,6 +4,7 @@
 [![Travis build status](https://travis-ci.com/jla-data/czechrates.svg?branch=master)](https://travis-ci.com/jla-data/czechrates)
 [![Coveralls test coverage](https://coveralls.io/repos/github/jla-data/czechrates/badge.svg)](https://coveralls.io/github/jla-data/czechrates)
 [![CRAN](http://www.r-pkg.org/badges/version/czechrates)](https://cran.r-project.org/package=czechrates) [![Downloads-total](http://cranlogs.r-pkg.org/badges/grand-total/czechrates?color=brightgreen)](https://www.r-pkg.org:443/pkg/czechrates) [![Downloads-weekly](http://cranlogs.r-pkg.org/badges/last-week/czechrates?color=brightgreen)](https://www.r-pkg.org:443/pkg/czechrates)
+[![R-CMD-check](https://github.com/jla-data/czechrates/workflows/R-CMD-check/badge.svg)](https://github.com/jla-data/czechrates/actions)
 <!-- badges: end -->
 
 The PRague InterBank Offered Rates (PRIBOR - the CZK member of the broader IBOR family) are provided by the Czech National Bank as a courtesy of the Czech Financial Benchmark Facility s.r.o., the benchmark administrator of the PRIBOR benchmark. The rates can be accessed for internal purposes free of charge via internet pages of ČNB – https://www.cnb.cz/en/financial-markets/money-market/pribor/format-of-the-pribor-rate-on-the-cnb-website/
