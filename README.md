@@ -6,13 +6,15 @@
 
 <!-- badges: end -->
 
+The package `{czechrates}` provides a convenient way to access the information stored on the ČNB website from the comfort of your R session. It does not store the rates (this would be against the terms of use, and the data would get stale rather soon).
+
+As a consequence a working internet connection is required to fully use the package.
+
 The ČNB mid FX rate is fixed by the Czech National Bank daily, and is the "official" FX rate used for accounting, taxes and customs. Even though ČNB does not actually *deal* at these rates the ČNB mid is one of the most relevant FX rates in the Czech republic – <https://www.cnb.cz/en/faq/How-does-the-CNB-calculate-the-korunas-exchange-rate-against-other-currencies/>
 
 The PRague InterBank Offered Rates (PRIBOR - the CZK member of the broader IBOR family) are provided by the Czech National Bank as a courtesy of the Czech Financial Benchmark Facility s.r.o., the benchmark administrator of the PRIBOR benchmark. The rates can be accessed for internal purposes free of charge via internet pages of ČNB – <https://www.cnb.cz/en/financial-markets/money-market/pribor/format-of-the-pribor-rate-on-the-cnb-website/>
 
 The two-week repo rate (a key policy rate) is formally announced by ČNB and also published on the ČNB internet – <https://www.cnb.cz/en/faq/How-has-the-CNB-two-week-repo-rate-changed-over-time/>
-
-The package `{czechrates}` provides a convenient way to access the information stored on the ČNB site from the comfort of your R session. It does not store the rates (this would be against the terms of use, and the data would get stale rather soon). As a consequence a working internet connection is required to use the package.
 
 <hr>
 
@@ -24,7 +26,7 @@ The package currently contains three functions:
 
 All functions have date valid as the first argument, with yesterday (`Sys.Date()-1`) as default.
 
-Both functions returning interest rate report percents as fractions, i.e. a rate of 1.5% per annum is returned as 0.015, not as 1.5.
+Both functions returning interest rate use convention of reporting percents as fractions, i.e. a interest rate of 1.5% per annum would be returned as `0.015`, not as `1.5` as might be sometimes the case.
 
 ## Installation
 
@@ -84,7 +86,7 @@ repo2w(as.Date("2020-04-01"))
   <date>       <dbl>
 1 2020-04-01    0.01
 
-# complete list of FX rates for yesterday
+# a ´complete table of FX rates for yesterday
 cnbfxrate()
 # A tibble: 33 x 6
    date_valid country    currency_name amount currency  rate

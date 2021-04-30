@@ -18,7 +18,7 @@ data frame - date_valid, country, currency name, quoted amount, currency ISO cod
 A function returning data frame of FX rates as fixed by the central bank.
 }
 \examples{
-cnbfxrate(as.Date("2002-08-12"))
+cnbfxrate(as.Date("2002-08-12"), "EUR") # EUR/CZK rate for August 12th, 2002
 
 
 
