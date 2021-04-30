@@ -45,7 +45,7 @@ cnbfxrate <- function(date = Sys.Date() - 1,
 }
 
 # downloader - a helper function to be l-applied
-dnl_fx <- function(datum = as.Date("2021-04-23")) {
+dnl_fx <- function(datum) {
 
   remote_path <- "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt?date=" # remote archive
   remote_file <- paste0(remote_path, as.character(datum, "%d.%m.%Y")) # path to ČNB source data
