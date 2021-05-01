@@ -2,6 +2,7 @@
 
   - included CNB mid FX rate
   - minor updates to resolve NOTES in CRAN checks (due to updated CRAN policy)
+  - travis & coveralls replaced by GitHub Actions & codecov
 
 ## version 0.1.10
 

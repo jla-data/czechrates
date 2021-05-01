@@ -13,7 +13,6 @@ vignette: >
 knitr::opts_chunk$set(collapse = T, fig.align="center", dpi = 150, out.width = "100%", fig.width = 8, fig.height = 4, message = F)
 ```
 
-
 ## PRIBOR - PRague InterBank Offered Rate
 
 The PRIBOR rates are provided by ČNB as a courtesy of the Czech Financial Benchmark Facility s.r.o., the benchmark administrator of the PRIBOR benchmark.
@@ -90,7 +89,7 @@ repo2w(three_dates)
 
 To ilustrate the development of the main policy rate – i.e. `czechrates::repo2w()` – we can consider a more recent history:
 
-```{r recent-development}
+```{r recent-development-ir}
 library(czechrates)
 library(ggplot2)
 library(scales)
@@ -106,6 +105,44 @@ ggplot(data = policy_rate, aes(x = date_valid, y = REPO_2W)) +
   theme_bw() +
   labs(title = "COVID-19 impact on CZK policy rate",
        y = "ČNB REPO rate (per annum basis)") +
+  theme(axis.title.x = element_blank())
+
+```
+
+
+## ČNB FX rates
+
+The Czech National Bank publishes a list of CZK exchange rates daily. ČNB does not actually trade at these rates, but they are immensely influential. It is "the" official exchange rate, mandated for use in accounting, tax and customs purposes.
+
+The rates are available on CNB website: https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/
+
+The `czechrates::cnbfxrate()` function has two parameters:
+
+- `date` = date valid for the FX rate; default is yesterday (`Sys.Date() - 1`)
+
+- `currency_code` ISO Code of currency, default is "ALL" / meaning a complete list of FX rates quoted for a given day
+
+
+
+```{r recent-development-fx}
+library(czechrates)
+library(ggplot2)
+library(scales)
+
+euro_rate <- cnbfxrate(seq(from = as.Date("2020-01-01"),
+                           to   = as.Date("2020-05-31"),
+                           by = 1),
+                       "EUR")
+
+ggplot(data = euro_rate, aes(x = date_valid, y = rate)) +
+  geom_line(color = "red", size = 1.25) +
+  scale_x_date(date_labels = "%d.%m.%Y") +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "",
+                                                    suffix = " CZK",
+                                                    accuracy = 1/100)) +
+  theme_bw() +
+  labs(title = "COVID-19 impact on CZK exchange rate",
+       y = "ČNB EUR/CZK FX rate") +
   theme(axis.title.x = element_blank())
 
 ```

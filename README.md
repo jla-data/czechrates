@@ -10,7 +10,7 @@ The package `{czechrates}` provides a convenient way to access the information s
 
 As a consequence a working internet connection is required to fully use the package.
 
-The ČNB mid FX rate is fixed by the Czech National Bank daily, and is the "official" FX rate used for accounting, taxes and customs. Even though ČNB does not actually *deal* at these rates the ČNB mid is one of the most relevant FX rates in the Czech republic – <https://www.cnb.cz/en/faq/How-does-the-CNB-calculate-the-korunas-exchange-rate-against-other-currencies/>
+The ČNB mid FX rate is fixed against CZK by the Czech National Bank daily, and is the "official" CZK FX rate used for accounting, taxes and customs purposes. Even though ČNB does not actually *deal* at these rates the ČNB mid is one of the most relevant FX rates in the Czech republic – <https://www.cnb.cz/en/faq/How-does-the-CNB-calculate-the-korunas-exchange-rate-against-other-currencies/>
 
 The PRague InterBank Offered Rates (PRIBOR - the CZK member of the broader IBOR family) are provided by the Czech National Bank as a courtesy of the Czech Financial Benchmark Facility s.r.o., the benchmark administrator of the PRIBOR benchmark. The rates can be accessed for internal purposes free of charge via internet pages of ČNB – <https://www.cnb.cz/en/financial-markets/money-market/pribor/format-of-the-pribor-rate-on-the-cnb-website/>
 
@@ -20,7 +20,7 @@ The two-week repo rate (a key policy rate) is formally announced by ČNB and als
 
 The package currently contains three functions:
 
--   `czechrates::cnbfxrate()` - ČNB mid FX rate
+-   `czechrates::cnbfxrate()` - ČNB mid CZK FX rate
 -   `czechrates::pribor()` - PRIBOR interest rate
 -   `czechrates::repo2w()` - two week REPO interest rate
 
@@ -86,7 +86,7 @@ repo2w(as.Date("2020-04-01"))
   <date>       <dbl>
 1 2020-04-01    0.01
 
-# a ´complete table of FX rates for yesterday
+# a complete table of CZK FX rates for yesterday
 cnbfxrate()
 # A tibble: 33 x 6
    date_valid country    currency_name amount currency  rate
