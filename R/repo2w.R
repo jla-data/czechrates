@@ -20,19 +20,13 @@ repo2w <- function(date = Sys.Date() - 1) {
   # a quick reality check:
   if(!inherits(date, "Date")) stop("'date' parameter expected as a Date data type!")
 
-  network <- as.logical(Sys.getenv("NETWORK_UP", unset = TRUE)) # dummy variable to allow testing of network
   cnb <- as.logical(Sys.getenv("CNB_UP", unset = TRUE)) # dummy variable to allow testing of network
 
   remote_file <- "https://www.cnb.cz/cs/casto-kladene-dotazy/.galleries/vyvoj_repo_historie.txt" # path to CNB source data
   local_file <- file.path(tempdir(), "vyvoj_repo_historie.txt") # local file - in tempdir
 
   if (!file.exists(local_file)) {
-    if (!curl::has_internet() | !network) { # network is down
-      message("No internet connection.")
-      return(NULL)
-    }
-
-    if (httr::http_error(remote_file) | !cnb) { # CNB website down
+    if (!ok_to_proceed(remote_file) | !cnb) { # CNB website down
       message("Data source broken.")
       return(NULL)
     }
@@ -43,14 +37,14 @@ repo2w <- function(date = Sys.Date() - 1) {
 
   local_df <- readr::read_delim(local_file,
                                 delim = "|", skip = 2,
+                                locale = readr::locale(decimal_mark = ','),
                                 col_names = c(
                                   "valid_from", "REPO_2W"
                                 ),
                                 col_types = readr::cols(
                                   valid_from = readr::col_date(format = "%Y%m%d"),
                                   REPO_2W = readr::col_double()
-                                  ),
-                                locale = readr::locale(decimal_mark = ',')
+                                  )
                                 )
 
   res <- local_df %>%
@@ -67,6 +61,8 @@ repo2w <- function(date = Sys.Date() - 1) {
     dplyr::filter(date_valid %in% date) %>%
     dplyr::mutate_at(dplyr::vars(3),  ~ . / 100) %>%
     dplyr::select(1, 3)
+
+  attr(res, 'spec') <- NULL
 
   res #
 

@@ -24,16 +24,9 @@
 # exported function...
 pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
 
-  network <- as.logical(Sys.getenv("NETWORK_UP", unset = TRUE)) # dummy variable to allow testing of network
   cnb <- as.logical(Sys.getenv("CNB_UP", unset = TRUE)) # dummy variable to allow testing of network
 
-
-  if (!curl::has_internet() | !network) { # network is down
-    message("No internet connection.")
-    return(NULL)
-  }
-
-  if (httr::http_error("https://www.cnb.cz/en/financial-markets/money-market/pribor/fixing-of-interest-rates-on-interbank-deposits-pribor/year.txt") | !cnb) { # CNB website down
+  if (!ok_to_proceed("https://www.cnb.cz/en/financial-markets/money-market/pribor/fixing-of-interest-rates-on-interbank-deposits-pribor/year.txt") | !cnb) { # CNB website down
     message("Data source broken.")
     return(NULL)
   }
@@ -47,7 +40,7 @@ pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
 
   sazba <- paste0("PRIBOR_", maturity)
 
-  res <- lapply(roky, downloader) %>%
+  res <- lapply(roky, dnl_pribor) %>%
     dplyr::bind_rows() %>%
     dplyr::filter(date_valid %in% date) %>%
     dplyr::select(date_valid, !! sazba) %>%
@@ -59,7 +52,7 @@ pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
 }
 
 # downloader - a helper function to be l-applied
-downloader <- function(year) {
+dnl_pribor <- function(year) {
 
   remote_path <- "https://www.cnb.cz/en/financial-markets/money-market/pribor/fixing-of-interest-rates-on-interbank-deposits-pribor/year.txt?year=" # remote archive
   remote_file <- paste0(remote_path, year) # path to ČNB source data
@@ -107,6 +100,8 @@ downloader <- function(year) {
                                   PRIBOR_1Y = readr::col_double()
                                 )
   )
+
+  attr(local_df, 'spec') <- NULL
 
   local_df
 } # /function

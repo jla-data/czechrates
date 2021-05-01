@@ -1,3 +1,9 @@
+## version 0.2.1
+
+  - included CNB mid FX rate
+  - minor updates to resolve NOTES in CRAN checks (due to updated CRAN policy)
+  - travis & coveralls replaced by GitHub Actions & codecov
+
 ## version 0.1.10
 
   - minor update of encoding related issues (CRAN check fail on strict Latin-1* locale)

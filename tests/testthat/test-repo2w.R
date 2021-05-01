@@ -8,10 +8,6 @@ test_that("expected input failures", {
 
 test_that("network failures", {
 
-  Sys.setenv("NETWORK_UP" = FALSE)
-  expect_message(repo2w(), "internet") # zpráva o chybějícím internetu
-  Sys.setenv("NETWORK_UP" = TRUE)
-
   Sys.setenv("CNB_UP" = FALSE)
   expect_message(repo2w(), "source") # zpráva o spadlé ČNB
   Sys.setenv("CNB_UP" = TRUE)
