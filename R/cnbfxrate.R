@@ -3,9 +3,9 @@
 #' A function returning data frame of FX rates as fixed by the central bank.
 #'
 #' @param date Date of publication as date, default is yesterday.
-#' @param currency_code ISO Code of currency, default is ALL / complete list.
+#' @param specific_currency ISO Code of currency, default is ALL / complete list.
 #'
-#' @return data frame - date_valid, country, currency name, quoted amount, currency ISO code, rate
+#' @return a data frame - date_valid, currency ISO code, quoted amount, rate
 #' @export
 #'
 #' @examples cnbfxrate(as.Date("2002-08-12"), "EUR") # EUR/CZK rate for August 12th, 2002
@@ -15,7 +15,7 @@
 
 # exported function
 cnbfxrate <- function(date = Sys.Date() - 1,
-                      currency_code = "ALL") {
+                      specific_currency = "ALL") {
 
   cnb <- as.logical(Sys.getenv("CNB_UP", unset = TRUE)) # dummy variable to allow testing of network
 
@@ -27,60 +27,83 @@ cnbfxrate <- function(date = Sys.Date() - 1,
   # a quick reality check:
   if(!inherits(date, "Date")) stop("'date' parameter expected as a Date data type!")
 
-  datumy <- date %>%
+  roky <- format(date, "%Y") %>%
     unique()
 
-  res <- lapply(datumy, dnl_fx) %>%
+  res <- lapply(roky, dnl_fx) %>%
     dplyr::bind_rows() %>%
-    dplyr::relocate(date_valid)
+    dplyr::filter(date_valid %in% date) %>%
+    dplyr::relocate(date_valid, currency_code, amount, rate)
+
 
   # single currency, or entire list?
-  if(currency_code != "ALL") {
+  if(specific_currency != "ALL") {
 
-    res <- subset(res, currency  == currency_code)
+    res <- subset(res, currency_code == specific_currency)
   }
 
     res
 
-}
+} # / exported function
 
 # downloader - a helper function to be l-applied
-dnl_fx <- function(datum) {
+dnl_fx <- function(year) {
 
-  remote_path <- "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt?date=" # remote archive
-  remote_file <- paste0(remote_path, as.character(datum, "%d.%m.%Y")) # path to ČNB source data
-  local_file <- file.path(tempdir(), paste0(datum, ".txt")) # local file - in tempdir
+
+  remote_path <- "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/rok.txt?rok=" # remote archive
+  remote_file <- paste0(remote_path, year) # path to ČNB source data
+  local_file <- file.path(tempdir(), paste0(year, ".txt")) # local file - in tempdir
 
   if (!file.exists(local_file)) {
 
     # proceed to download via curl
     curl::curl_download(url = remote_file, destfile = local_file, quiet = T)
-    Sys.sleep(1/1000) # maličký timeout aby se soubor uložil
+    Sys.sleep(1/1000) # a tiny delay to finish saving file
+
   } # /if - local file exists
 
-  local_df <- readr::read_delim(local_file,
-                                delim = "|", skip = 2,
-                                locale = readr::locale(decimal_mark = ",", grouping_mark = "."),
-                                col_names = c(
-                                  "country",
-                                  "currency_name",
-                                  "amount",
-                                  "currency",
-                                  "rate"
-                                ),
-                                col_types = readr::cols(
-                                  country = readr::col_character(),
-                                  currency_name = readr::col_character(),
-                                  amount = readr::col_integer(),
-                                  currency = readr::col_character(),
-                                  rate = readr::col_double()
-                                )
-  )
+  raw_file <- readLines(local_file) # pro zjištění hlaviček
 
-  attr(local_df, 'spec') <- NULL
+  useky <- c(grep("Datum*", raw_file), length(raw_file)) # řádky hlaviček, a nakonec konec
 
-  local_df$date_valid = datum
+  for (i in seq_along(useky)[-1]-1) {
 
-  local_df
-} # /function
+    header <- unlist(strsplit(raw_file[useky[i]], "[|]"))[-1] %>%
+      tibble::enframe(name = NULL) %>%
+      tidyr::separate(sep = " ",
+                      col = "value",
+                      into = c("amount", "currency_code")) %>%
+      dplyr::mutate(amount = as.numeric(amount))
+
+    local_df <- readr::read_delim(local_file,
+                                  delim = "|", skip = useky[i], n_max = useky[i+1] - useky[i],
+                                  locale = readr::locale(decimal_mark = ",", grouping_mark = "."),
+                                  col_names = FALSE,
+                                  col_types = readr::cols(
+                                    X1 = readr::col_date(format = "%d.%m.%Y"),
+                                    .default = readr::col_double()
+                                  )) %>%
+      dplyr::rename(date_valid = X1) %>%
+      tidyr::pivot_longer(cols = starts_with("X"),
+                          values_to = "rate") %>%
+      dplyr::select(-name)
+
+    # recycling vectors in a tible / oh so taboo... :)
+    times <- nrow(local_df) / nrow(header)
+    local_df$amount <- rep(header$amount, times)
+    local_df$currency_code <- rep(header$currency_code, times)
+
+    if(i >= 2) {
+      vystup <- dplyr::bind_rows(vystup, local_df)
+    } else {
+      vystup <- local_df
+    }
+
+  } #/ for
+
+  # get rid of that pesky readr artefact
+  attr(vystup, 'spec') <- NULL
+
+  vystup
+} # / helper function
 

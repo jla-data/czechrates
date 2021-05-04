@@ -120,7 +120,7 @@ The `czechrates::cnbfxrate()` function has two parameters:
 
 - `date` = date valid for the FX rate; default is yesterday (`Sys.Date() - 1`)
 
-- `currency_code` ISO Code of currency, default is "ALL" / meaning a complete list of FX rates quoted for a given day
+- `specific_currency` ISO Code of currency, default is "ALL" / meaning a complete list of FX rates quoted for a given day
 
 
 
