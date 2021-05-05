@@ -64,7 +64,7 @@ dnl_fx <- function(year) {
 
   raw_file <- readLines(local_file) # pro zjištění hlaviček
 
-  useky <- c(grep("Datum*", raw_file), length(raw_file)) # řádky hlaviček, a nakonec konec
+  useky <- c(grep("Datum*", raw_file), length(raw_file)+1) # řádky hlaviček, a nakonec konec
 
   for (i in seq_along(useky)[-1]-1) {
 
@@ -76,7 +76,7 @@ dnl_fx <- function(year) {
       dplyr::mutate(amount = as.numeric(amount))
 
     local_df <- readr::read_delim(local_file,
-                                  delim = "|", skip = useky[i], n_max = useky[i+1] - useky[i],
+                                  delim = "|", skip = useky[i], n_max = useky[i+1] - useky[i] -1,
                                   locale = readr::locale(decimal_mark = ",", grouping_mark = "."),
                                   col_names = FALSE,
                                   col_types = readr::cols(
