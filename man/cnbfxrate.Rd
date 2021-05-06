@@ -4,15 +4,15 @@
 \alias{cnbfxrate}
 \title{Central bank exchange rate fixing}
 \usage{
-cnbfxrate(date = Sys.Date() - 1, currency_code = "ALL")
+cnbfxrate(date = Sys.Date() - 1, specific_currency = "ALL")
 }
 \arguments{
 \item{date}{Date of publication as date, default is yesterday.}
 
-\item{currency_code}{ISO Code of currency, default is ALL / complete list.}
+\item{specific_currency}{ISO Code of currency, default is ALL / complete list.}
 }
 \value{
-data frame - date_valid, country, currency name, quoted amount, currency ISO code, rate
+a data frame - date_valid, currency ISO code, quoted amount, rate
 }
 \description{
 A function returning data frame of FX rates as fixed by the central bank.

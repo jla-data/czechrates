@@ -88,40 +88,38 @@ repo2w(as.Date("2020-04-01"))
 
 # a complete table of CZK FX rates for yesterday
 cnbfxrate()
-# A tibble: 33 x 6
-   date_valid country    currency_name amount currency  rate
-   <date>     <chr>      <chr>          <int> <chr>    <dbl>
- 1 2021-04-29 Austrálie  dolar              1 AUD      16.6 
- 2 2021-04-29 Brazílie   real               1 BRL       3.97
- 3 2021-04-29 Bulharsko  lev                1 BGN      13.2 
- 4 2021-04-29 Čína       žen-min-pi         1 CNY       3.29
- 5 2021-04-29 Dánsko     koruna             1 DKK       3.47
- 6 2021-04-29 EMU        euro               1 EUR      25.8 
- 7 2021-04-29 Filipíny   peso             100 PHP      44.0 
- 8 2021-04-29 Hongkong   dolar              1 HKD       2.74
- 9 2021-04-29 Chorvatsko kuna               1 HRK       3.42
-10 2021-04-29 Indie      rupie            100 INR      28.7 
+# A tibble: 33 x 4
+   date_valid currency_code amount  rate
+   <date>     <chr>          <dbl> <dbl>
+ 1 2021-05-03 AUD                1 16.6 
+ 2 2021-05-03 BGN                1 13.2 
+ 3 2021-05-03 BRL                1  3.94
+ 4 2021-05-03 CAD                1 17.4 
+ 5 2021-05-03 CHF                1 23.4 
+ 6 2021-05-03 CNY                1  3.31
+ 7 2021-05-03 DKK                1  3.47
+ 8 2021-05-03 EUR                1 25.8 
+ 9 2021-05-03 GBP                1 29.7 
+10 2021-05-03 HKD                1  2.76
 # … with 23 more rows
 
 # EUR/CZK rate for April 1st, 2020
 cnbfxrate(as.Date("2020-04-01"), "EUR") 
-# A tibble: 1 x 6
-  date_valid country currency_name amount currency  rate
-  <date>     <chr>   <chr>          <int> <chr>    <dbl>
-1 2020-04-01 EMU     euro               1 EUR       27.4
+# A tibble: 1 x 4
+  date_valid currency_code amount  rate
+  <date>     <chr>          <dbl> <dbl>
+1 2020-04-01 EUR                1  27.4
 
 # EUR/CZK rate for the week following April 1st, 2020
 cnbfxrate(as.Date("2020-04-01") + 0:6, "EUR") 
-# A tibble: 7 x 6
-  date_valid country currency_name amount currency  rate
-  <date>     <chr>   <chr>          <int> <chr>    <dbl>
-1 2020-04-01 EMU     euro               1 EUR       27.4
-2 2020-04-02 EMU     euro               1 EUR       27.6
-3 2020-04-03 EMU     euro               1 EUR       27.5
-4 2020-04-04 EMU     euro               1 EUR       27.5
-5 2020-04-05 EMU     euro               1 EUR       27.5
-6 2020-04-06 EMU     euro               1 EUR       27.6
-7 2020-04-07 EMU     euro               1 EUR       27.2
+# A tibble: 5 x 4
+  date_valid currency_code amount  rate
+  <date>     <chr>          <dbl> <dbl>
+1 2020-04-01 EUR                1  27.4
+2 2020-04-02 EUR                1  27.6
+3 2020-04-03 EUR                1  27.5
+4 2020-04-06 EUR                1  27.6
+5 2020-04-07 EUR                1  27.2
 ```
 
 A graphic example:

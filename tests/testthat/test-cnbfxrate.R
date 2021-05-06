@@ -18,6 +18,12 @@ test_that("data format", {
   expect_gt(nrow(cnbfxrate(date = as.Date("2020-04-01"))), 1) # všechny měny implicitně
   expect_equal(nrow(cnbfxrate(as.Date("2020-04-01"), "EUR")), 1) # jednen datum, jedno ojro
   expect_equal(nrow(cnbfxrate(as.Date(c("2020-04-01", "2020-04-02")) , "EUR")), 2) # dva datumy, dvě ojra
+  expect_equal(nrow(cnbfxrate(seq(from = as.Date("2020-12-31"),
+                                  to = as.Date("2021-01-04"),
+                                  by = 1) , "EUR")), 2) # dva pracovní datumy, dvě ojra
+  expect_equal(nrow(cnbfxrate(seq(from = as.Date("2005-01-01"),
+                                  to = as.Date("2005-12-31"),
+                                  by = 1) , "EUR")), 253) # celý rok = 253 záznamů (+3 hlavičky)
 })
 
 test_that("known values", {

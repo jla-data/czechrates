@@ -1,10 +1,10 @@
 ---
-title: "CZK Reference Interest Rates"
+title: "CZK Reference Rates"
 author: "Jindra Lacko"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{CZK_Reference_Interest_Rates}
+  %\VignetteIndexEntry{CZK_Reference_Rates}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -120,9 +120,22 @@ The `czechrates::cnbfxrate()` function has two parameters:
 
 - `date` = date valid for the FX rate; default is yesterday (`Sys.Date() - 1`)
 
-- `currency_code` ISO Code of currency, default is "ALL" / meaning a complete list of FX rates quoted for a given day
+- `specific_currency` ISO Code of currency, default is "ALL" / meaning a complete list of FX rates quoted for a given day
+
+As some currencies are not quoted per single unit (e.g. Indonesian rupiah is quoted per 1000 IDR, and Hungarian forint per 100 HUF) the function returns not only the rate, but also quoted amount per currency.
 
 
+```{r fx-rates}
+# complete list of ČNB FX rates for yesterday
+cnbfxrate()
+
+# EUR/CZK rate for three specific dates
+cnbfxrate(three_dates, "EUR")
+
+```
+
+
+For a graphic overview we can consider the EUR/CZK rate over the same period as for the main policy interest rate:
 
 ```{r recent-development-fx}
 library(czechrates)
@@ -137,9 +150,9 @@ euro_rate <- cnbfxrate(seq(from = as.Date("2020-01-01"),
 ggplot(data = euro_rate, aes(x = date_valid, y = rate)) +
   geom_line(color = "red", size = 1.25) +
   scale_x_date(date_labels = "%d.%m.%Y") +
-  scale_y_continuous(labels = scales::dollar_format(prefix = "",
-                                                    suffix = " CZK",
-                                                    accuracy = 1/100)) +
+  scale_y_continuous(labels = dollar_format(prefix = "",
+                                            suffix = " CZK",
+                                            accuracy = 1/100)) +
   theme_bw() +
   labs(title = "COVID-19 impact on CZK exchange rate",
        y = "ČNB EUR/CZK FX rate") +

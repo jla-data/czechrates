@@ -8,5 +8,7 @@
 #' @keywords internal
 #' @importFrom magrittr %>%
 
-globalVariables(names = c("date_valid", "valid_from", "valid_to", "fake", "currency"))
+globalVariables(names = c("date_valid", "valid_from", "valid_to",
+                          "fake", "currency", "X1", "amount", "currency_code",
+                          "name", "rate", "starts_with"))
 

@@ -49,12 +49,13 @@ pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
 
   res
 
-}
+} # / exported function
 
 # downloader - a helper function to be l-applied
 dnl_pribor <- function(year) {
 
-  remote_path <- "https://www.cnb.cz/en/financial-markets/money-market/pribor/fixing-of-interest-rates-on-interbank-deposits-pribor/year.txt?year=" # remote archive
+
+  remote_path <- "https://www.cnb.cz/cs/financni-trhy/penezni-trh/pribor/fixing-urokovych-sazeb-na-mezibankovnim-trhu-depozit-pribor/rok.txt?year=" # remote archive
   remote_file <- paste0(remote_path, year) # path to ČNB source data
   local_file <- file.path(tempdir(), paste0(year, ".txt")) # local file - in tempdir
 
@@ -62,10 +63,12 @@ dnl_pribor <- function(year) {
 
     # proceed to download via curl
     curl::curl_download(url = remote_file, destfile = local_file, quiet = T)
+    Sys.sleep(1/500)
   } # /if - local file exists
 
   local_df <- readr::read_delim(local_file,
                                 delim = "|", skip = 2,
+                                locale = readr::locale(decimal_mark = ","),
                                 col_names = c(
                                   "date_valid",
                                   "PRIBID_1D", "PRIBOR_1D",
@@ -79,7 +82,7 @@ dnl_pribor <- function(year) {
                                   "PRIBID_1Y", "PRIBOR_1Y"
                                 ),
                                 col_types = readr::cols(
-                                  date_valid = readr::col_date(format = "%d %b %Y"),
+                                  date_valid = readr::col_date(format = "%d.%m.%Y"),
                                   PRIBID_1D = readr::col_double(),
                                   PRIBOR_1D = readr::col_double(),
                                   PRIBID_1W = readr::col_double(),
