@@ -129,7 +129,7 @@ As some currencies are not quoted per single unit (e.g. Indonesian rupiah is quo
 # complete list of ČNB FX rates for yesterday
 cnbfxrate()
 
-# EUR/CZK rate for three specific dates
+# EUR/CZK rate for three specific dates (as defined in the PRIBOR section)
 cnbfxrate(three_dates, "EUR")
 
 ```
