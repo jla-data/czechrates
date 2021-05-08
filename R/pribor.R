@@ -57,7 +57,7 @@ dnl_pribor <- function(year) {
 
   remote_path <- "https://www.cnb.cz/cs/financni-trhy/penezni-trh/pribor/fixing-urokovych-sazeb-na-mezibankovnim-trhu-depozit-pribor/rok.txt?year=" # remote archive
   remote_file <- paste0(remote_path, year) # path to ČNB source data
-  local_file <- file.path(tempdir(), paste0(year, ".txt")) # local file - in tempdir
+  local_file <- file.path(tempdir(), paste0("pr-", year, ".txt")) # local file - in tempdir
 
   if (!file.exists(local_file)) {
 

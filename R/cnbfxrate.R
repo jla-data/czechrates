@@ -52,7 +52,7 @@ dnl_fx <- function(year) {
 
   remote_path <- "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/rok.txt?rok=" # remote archive
   remote_file <- paste0(remote_path, year) # path to ČNB source data
-  local_file <- file.path(tempdir(), paste0(year, ".txt")) # local file - in tempdir
+  local_file <- file.path(tempdir(), paste0("fx-", year, ".txt")) # local file - in tempdir
 
   if (!file.exists(local_file)) {
 
@@ -66,15 +66,20 @@ dnl_fx <- function(year) {
 
   useky <- c(grep("Datum*", raw_file), length(raw_file)+1) # řádky hlaviček, a nakonec konec
 
-  for (i in seq_along(useky)[-1]-1) {
+  for (i in 1:(length(useky)-1)) {
 
-    header <- unlist(strsplit(raw_file[useky[i]], "[|]"))[-1] %>%
+    # 1. řádek = hlavičkam, zatím jako list / datum & jednotka + iso měny
+    hlavicka <- strsplit(raw_file[useky[i]][1], split = "[|]")
+
+    # hlavička z listu na tibble, bez prvního prvku (datum)
+    header <- unlist(hlavicka)[-1] %>%
       tibble::enframe(name = NULL) %>%
-      tidyr::separate(sep = " ",
+      tidyr::separate(sep = "\\s",
                       col = "value",
                       into = c("amount", "currency_code")) %>%
-      dplyr::mutate(amount = as.numeric(amount))
+      dplyr::mutate(dplyr::across(1, as.numeric))
 
+    # vlastní datové řádky (hlavička skipnutá)
     local_df <- readr::read_delim(local_file,
                                   delim = "|", skip = useky[i], n_max = useky[i+1] - useky[i] -1,
                                   locale = readr::locale(decimal_mark = ",", grouping_mark = "."),
