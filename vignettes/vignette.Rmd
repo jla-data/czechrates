@@ -76,7 +76,7 @@ The two-week repo rate (a key policy rate) is set directly by ČNB and also publ
 
 The `czechrates::repo2w()` function has but a single parameter (as maturity is by definition two weeks):
 
-- `date` = date valid for the two2week repo rate; default is yesterday (`Sys.Date() - 1`)
+- `date` = date valid for the two week repo rate; default is yesterday (`Sys.Date() - 1`)
 
 ```{r repo-rate}
 # two-week REPO rate for yesterday
