@@ -1,15 +1,15 @@
 Package: czechrates
 Type: Package
 Title: Czech Interest Rates
-Version: 0.2.1
+Version: 0.2.0
 Date: 
-  2021-05-10
+  2021-05-08
 Author: 
   Jindra Lacko
 Maintainer: 
   Jindra Lacko <jindra.lacko@gmail.com>
 Description:
-  Interface to interest and FX rates published by the Czech National Bank.
+  Interface to interest and foreign exchange rates published by the Czech National Bank.
 URL: https://github.com/jla-data/czechrates
 BugReports: https://github.com/jla-data/czechrates/issues
 License: MIT + file LICENSE

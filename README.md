@@ -42,7 +42,7 @@ You are welcome to install the latest development version from GitHub by running
 remotes::install_github("jla-data/czechrates")
 ```
 
-The master branch should be reasoneably stable, but I do not recommend installing from development branches unless you know what you are doing. Things are bound to be somewhat rough around the edges there.
+The master branch should be reasonably stable, but I do not recommend installing from development branches unless you know what you are doing. Things are bound to be somewhat rough around the edges there.
 
 ## Example
 

@@ -1,4 +1,4 @@
-## version 0.2.1
+## version 0.2.0
 
   - included CNB mid FX rate
   - minor updates to resolve NOTES in CRAN checks (due to updated CRAN policy)
