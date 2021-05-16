@@ -2,7 +2,7 @@
 % Please edit documentation in R/ok_to_proceed.R
 \name{ok_to_proceed}
 \alias{ok_to_proceed}
-\title{Internal function - tests availabilty of interet resources}
+\title{Internal function - tests availability of internet resources}
 \usage{
 ok_to_proceed(remote_file)
 }
@@ -10,6 +10,6 @@ ok_to_proceed(remote_file)
 \item{remote_file}{resource to be tested}
 }
 \description{
-Internal function - tests availabilty of interet resources
+Internal function - tests availability of internet resources
 }
 \keyword{internal}
