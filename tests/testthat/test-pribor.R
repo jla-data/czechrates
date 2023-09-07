@@ -1,12 +1,17 @@
 library(dplyr)
 
 test_that("expected input failures", {
+
+  skip_on_cran()
+
   expect_error(pribor("asdf")) # není datum
   expect_error(pribor(as.Date("2020-04-01"), "asdf")) # není platná maturita
   expect_error(pribor(as.Date("2020-04-01"), c("1D", "asdf"))) # není platná maturita
 })
 
 test_that("network failures", {
+
+  skip_on_cran()
 
   Sys.setenv("CNB_UP" = FALSE)
   expect_message(pribor(), "source") # zpráva o spadlé ČNB
@@ -15,6 +20,9 @@ test_that("network failures", {
 })
 
 test_that("data format", {
+
+  skip_on_cran()
+
   expect_true(is.data.frame(pribor()))
   expect_true(inherits(pull(pribor(), 1), "Date"))
   expect_true(inherits(pull(pribor(), 2), "numeric"))
@@ -26,6 +34,9 @@ test_that("data format", {
 })
 
 test_that("known values", {
+
+  skip_on_cran()
+
   expect_equal(pribor(as.Date("1997-05-29"))$PRIBOR_1D, 194.38  / 100)
   expect_equal(pribor(as.Date("1997-05-29"), c("1D", "1W"))$PRIBOR_1W, 85.63 / 100)
 })

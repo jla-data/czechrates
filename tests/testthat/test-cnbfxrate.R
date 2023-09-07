@@ -1,10 +1,15 @@
 library(dplyr)
 
 test_that("expected input failures", {
+
+  skip_on_cran()
+
   expect_error(cnbfxrate("asdf")) # není datum
 })
 
 test_that("network failures", {
+
+  skip_on_cran()
 
   Sys.setenv("CNB_UP" = FALSE)
   expect_message(cnbfxrate(), "source") # zpráva o spadlé ČNB
@@ -13,6 +18,9 @@ test_that("network failures", {
 })
 
 test_that("data format", {
+
+  skip_on_cran()
+
   expect_true(is.data.frame(cnbfxrate()))
   expect_gt(nrow(cnbfxrate(date = as.Date("2020-04-01"), "ALL")), 1) # všechny měny explicitně
   expect_gt(nrow(cnbfxrate(date = as.Date("2020-04-01"))), 1) # všechny měny implicitně
@@ -27,6 +35,9 @@ test_that("data format", {
 })
 
 test_that("known values", {
+
+  skip_on_cran()
+
   expect_equal(cnbfxrate(as.Date("2020-04-01"), "EUR")$rate, 27.380)
   expect_equal(cnbfxrate(as.Date("2020-04-01"), "ILS")$rate, 7.019)
 })
