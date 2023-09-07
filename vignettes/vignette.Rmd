@@ -30,14 +30,14 @@ The `czechrates::pribor()` function has two parameters:
 library(czechrates)
 
 # PRIBOR: relying on default for both date and tenor
-pribor() 
+pribor()
 ## # A tibble: 1 × 2
 ##   date_valid PRIBOR_1D
 ##   <date>         <dbl>
 ## 1 2023-09-06      0.07
 
 # PRIBOR: specific date, default tenor
-pribor(as.Date("2020-05-20")) 
+pribor(as.Date("2020-05-20"))
 ## # A tibble: 1 × 2
 ##   date_valid PRIBOR_1D
 ##   <date>         <dbl>
@@ -57,7 +57,7 @@ pribor(three_dates, "1W")
 ## 3 2020-05-13    0.0028
 
 # PRIBOR: four rates for a single date
-pribor(as.Date("2020-05-20"), c("1D", "1W", "1M", "1Y")) 
+pribor(as.Date("2020-05-20"), c("1D", "1W", "1M", "1Y"))
 ## # A tibble: 1 × 5
 ##   date_valid PRIBOR_1D PRIBOR_1W PRIBOR_1M PRIBOR_1Y
 ##   <date>         <dbl>     <dbl>     <dbl>     <dbl>
@@ -72,7 +72,7 @@ library(czechrates)
 library(ggplot2)
 library(scales)
 
-offered_rate <- pribor(seq(from = as.Date("1997-05-01"), 
+offered_rate <- pribor(seq(from = as.Date("1997-05-01"),
                            to   = as.Date("1997-06-30"),
                            by = 1))
 
@@ -87,13 +87,13 @@ ggplot(data = offered_rate, aes(x = date_valid, y = PRIBOR_1D)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="figure/asian-fever-1.png" alt="plot of chunk asian-fever" width="100%" />
+<img src="./vignettes/asian-fever-1.png" alt="plot of chunk asian-fever" width="100%" />
 <p class="caption">plot of chunk asian-fever</p>
 </div>
 
 ## Two-week Repo Rate
 
-The two-week repo rate (a key policy rate) is set directly by ČNB and also published on the ČNB internet – https://www.cnb.cz/en/faq/How-has-the-CNB-two-week-repo-rate-changed-over-time/ 
+The two-week repo rate (a key policy rate) is set directly by ČNB and also published on the ČNB internet – https://www.cnb.cz/en/faq/How-has-the-CNB-two-week-repo-rate-changed-over-time/
 
 The `czechrates::repo2w()` function has but a single parameter (as maturity is by definition two weeks):
 
@@ -126,7 +126,7 @@ library(czechrates)
 library(ggplot2)
 library(scales)
 
-policy_rate <- repo2w(seq(from = as.Date("2020-01-01"), 
+policy_rate <- repo2w(seq(from = as.Date("2020-01-01"),
                           to   = as.Date("2020-05-31"),
                           by = 1))
 
@@ -141,7 +141,7 @@ ggplot(data = policy_rate, aes(x = date_valid, y = REPO_2W)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="figure/recent-development-ir-1.png" alt="plot of chunk recent-development-ir" width="100%" />
+<img src="./vignettes/recent-development-ir-1.png" alt="plot of chunk recent-development-ir" width="100%" />
 <p class="caption">plot of chunk recent-development-ir</p>
 </div>
 
@@ -217,6 +217,6 @@ ggplot(data = euro_rate, aes(x = date_valid, y = rate)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="figure/recent-development-fx-1.png" alt="plot of chunk recent-development-fx" width="100%" />
+<img src="./vignettes/recent-development-fx-1.png" alt="plot of chunk recent-development-fx" width="100%" />
 <p class="caption">plot of chunk recent-development-fx</p>
 </div>

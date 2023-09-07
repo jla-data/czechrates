@@ -1,9 +1,9 @@
 Package: czechrates
 Type: Package
 Title: Czech Interest & Foreign Exchange Rates
-Version: 0.2.3
+Version: 0.2.4
 Date: 
-  2022-09-23
+  2024-09-09
 Authors@R: c(
     person(given = "Jindra", 
            family = "Lacko", 
@@ -33,5 +33,5 @@ Suggests:
   scales,
   knitr,
   covr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr

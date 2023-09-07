@@ -10,7 +10,13 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(collapse = T, fig.align="center", dpi = 150, out.width = "100%", fig.width = 8, fig.height = 4, message = F)
+knitr::opts_chunk$set(collapse = T,
+                      fig.align="center",
+                      dpi = 150,
+                      out.width = "100%",
+                      fig.width = 8,
+                      fig.height = 4,
+                      fig.path = "./vignettes/")
 ```
 
 ## PRIBOR - PRague InterBank Offered Rate
@@ -31,10 +37,10 @@ The `czechrates::pribor()` function has two parameters:
 library(czechrates)
 
 # PRIBOR: relying on default for both date and tenor
-pribor() 
+pribor()
 
 # PRIBOR: specific date, default tenor
-pribor(as.Date("2020-05-20")) 
+pribor(as.Date("2020-05-20"))
 
 # three specific dates + a specific tenor (weekly rate)
 three_dates <- as.Date(c("2020-05-11", "2020-05-12", "2020-05-13"))
@@ -43,7 +49,7 @@ three_dates
 pribor(three_dates, "1W")
 
 # PRIBOR: four rates for a single date
-pribor(as.Date("2020-05-20"), c("1D", "1W", "1M", "1Y")) 
+pribor(as.Date("2020-05-20"), c("1D", "1W", "1M", "1Y"))
 
 
 ```
@@ -55,7 +61,7 @@ library(czechrates)
 library(ggplot2)
 library(scales)
 
-offered_rate <- pribor(seq(from = as.Date("1997-05-01"), 
+offered_rate <- pribor(seq(from = as.Date("1997-05-01"),
                            to   = as.Date("1997-06-30"),
                            by = 1))
 
@@ -72,7 +78,7 @@ ggplot(data = offered_rate, aes(x = date_valid, y = PRIBOR_1D)) +
 
 ## Two-week Repo Rate
 
-The two-week repo rate (a key policy rate) is set directly by ČNB and also published on the ČNB internet – https://www.cnb.cz/en/faq/How-has-the-CNB-two-week-repo-rate-changed-over-time/ 
+The two-week repo rate (a key policy rate) is set directly by ČNB and also published on the ČNB internet – https://www.cnb.cz/en/faq/How-has-the-CNB-two-week-repo-rate-changed-over-time/
 
 The `czechrates::repo2w()` function has but a single parameter (as maturity is by definition two weeks):
 
@@ -94,7 +100,7 @@ library(czechrates)
 library(ggplot2)
 library(scales)
 
-policy_rate <- repo2w(seq(from = as.Date("2020-01-01"), 
+policy_rate <- repo2w(seq(from = as.Date("2020-01-01"),
                           to   = as.Date("2020-05-31"),
                           by = 1))
 
