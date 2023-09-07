@@ -10,3 +10,5 @@
 ^\.github$
 ^codecov\.yml$
 ^CITATION\.cff$
+vignettes\vignette.Rmd.orig
+vignettes\figure\*

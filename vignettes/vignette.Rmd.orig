@@ -1,7 +1,7 @@
 ---
 title: "CZK Reference Rates"
 author: "Jindra Lacko"
-date: "2023-09-07"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{CZK_Reference_Rates}
@@ -9,7 +9,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = T, fig.align="center", dpi = 150, out.width = "100%", fig.width = 8, fig.height = 4, message = F)
+```
 
 ## PRIBOR - PRague InterBank Offered Rate
 
@@ -25,49 +27,30 @@ The `czechrates::pribor()` function has two parameters:
 
 - `maturity` = tenor of the PRIBOR rate; quoted as one of the standard maturities: 1D (overnight = default), 1W (weekly) and 1M, 2M, 3M, 6M, 9M and 1Y.
 
-
-```r
+```{r repo}
 library(czechrates)
 
 # PRIBOR: relying on default for both date and tenor
 pribor() 
-## # A tibble: 1 × 2
-##   date_valid PRIBOR_1D
-##   <date>         <dbl>
-## 1 2023-09-06      0.07
 
 # PRIBOR: specific date, default tenor
 pribor(as.Date("2020-05-20")) 
-## # A tibble: 1 × 2
-##   date_valid PRIBOR_1D
-##   <date>         <dbl>
-## 1 2020-05-20    0.0025
 
 # three specific dates + a specific tenor (weekly rate)
 three_dates <- as.Date(c("2020-05-11", "2020-05-12", "2020-05-13"))
 three_dates
-## [1] "2020-05-11" "2020-05-12" "2020-05-13"
 
 pribor(three_dates, "1W")
-## # A tibble: 3 × 2
-##   date_valid PRIBOR_1W
-##   <date>         <dbl>
-## 1 2020-05-11    0.0028
-## 2 2020-05-12    0.0028
-## 3 2020-05-13    0.0028
 
 # PRIBOR: four rates for a single date
 pribor(as.Date("2020-05-20"), c("1D", "1W", "1M", "1Y")) 
-## # A tibble: 1 × 5
-##   date_valid PRIBOR_1D PRIBOR_1W PRIBOR_1M PRIBOR_1Y
-##   <date>         <dbl>     <dbl>     <dbl>     <dbl>
-## 1 2020-05-20    0.0025    0.0027    0.0031    0.0041
+
+
 ```
 
 Using `czechrates::pribor()` you can re-live some of the scariest phases of the Prague interbank market - such as the period around Asian crisis of 1997 (when overnight rates briefly went over 100% on annual basis).
 
-
-```r
+```{r asian-fever}
 library(czechrates)
 library(ggplot2)
 library(scales)
@@ -84,12 +67,8 @@ ggplot(data = offered_rate, aes(x = date_valid, y = PRIBOR_1D)) +
   labs(title = "A ghost of rates past...",
        y = "Overnight PRIBOR (per annum basis)") +
   theme(axis.title.x = element_blank())
-```
 
-<div class="figure" style="text-align: center">
-<img src="figure/asian-fever-1.png" alt="plot of chunk asian-fever" width="100%" />
-<p class="caption">plot of chunk asian-fever</p>
-</div>
+```
 
 ## Two-week Repo Rate
 
@@ -99,29 +78,18 @@ The `czechrates::repo2w()` function has but a single parameter (as maturity is b
 
 - `date` = date valid for the two week repo rate; default is yesterday (`Sys.Date() - 1`)
 
-
-```r
+```{r repo-rate}
 # two-week REPO rate for yesterday
 repo2w()
-## # A tibble: 1 × 2
-##   date_valid REPO_2W
-##   <date>       <dbl>
-## 1 2023-09-06    0.07
 
 # two-week REPO rate for three specific dates (as defined in the PRIBOR section)
 repo2w(three_dates)
-## # A tibble: 3 × 2
-##   date_valid REPO_2W
-##   <date>       <dbl>
-## 1 2020-05-11  0.01  
-## 2 2020-05-12  0.0025
-## 3 2020-05-13  0.0025
+
 ```
 
 To ilustrate the development of the main policy rate – i.e. `czechrates::repo2w()` – we can consider a more recent history:
 
-
-```r
+```{r recent-development-ir}
 library(czechrates)
 library(ggplot2)
 library(scales)
@@ -138,12 +106,8 @@ ggplot(data = policy_rate, aes(x = date_valid, y = REPO_2W)) +
   labs(title = "COVID-19 impact on CZK policy rate",
        y = "ČNB REPO rate (per annum basis)") +
   theme(axis.title.x = element_blank())
-```
 
-<div class="figure" style="text-align: center">
-<img src="figure/recent-development-ir-1.png" alt="plot of chunk recent-development-ir" width="100%" />
-<p class="caption">plot of chunk recent-development-ir</p>
-</div>
+```
 
 
 ## ČNB FX rates
@@ -161,40 +125,19 @@ The `czechrates::cnbfxrate()` function has two parameters:
 As some currencies are not quoted per single unit (e.g. Indonesian rupiah is quoted per 1000 IDR, and Hungarian forint per 100 HUF) the function returns not only the rate, but also quoted amount per currency.
 
 
-
-```r
+```{r fx-rates}
 # complete list of ČNB FX rates for yesterday
 cnbfxrate()
-## # A tibble: 31 × 4
-##    date_valid currency_code amount  rate
-##    <date>     <chr>          <dbl> <dbl>
-##  1 2023-09-06 AUD                1 14.4 
-##  2 2023-09-06 BGN                1 12.4 
-##  3 2023-09-06 BRL                1  4.53
-##  4 2023-09-06 CAD                1 16.5 
-##  5 2023-09-06 CHF                1 25.3 
-##  6 2023-09-06 CNY                1  3.09
-##  7 2023-09-06 DKK                1  3.25
-##  8 2023-09-06 EUR                1 24.2 
-##  9 2023-09-06 GBP                1 28.3 
-## 10 2023-09-06 HKD                1  2.88
-## # ℹ 21 more rows
 
 # EUR/CZK rate for three specific dates (as defined in the PRIBOR section)
 cnbfxrate(three_dates, "EUR")
-## # A tibble: 3 × 4
-##   date_valid currency_code amount  rate
-##   <date>     <chr>          <dbl> <dbl>
-## 1 2020-05-11 EUR                1  27.6
-## 2 2020-05-12 EUR                1  27.4
-## 3 2020-05-13 EUR                1  27.4
+
 ```
 
 
 For a graphic overview we can consider the EUR/CZK rate over the same period as for the main policy interest rate:
 
-
-```r
+```{r recent-development-fx}
 library(czechrates)
 library(ggplot2)
 library(scales)
@@ -214,9 +157,5 @@ ggplot(data = euro_rate, aes(x = date_valid, y = rate)) +
   labs(title = "COVID-19 impact on CZK exchange rate",
        y = "ČNB EUR/CZK FX rate") +
   theme(axis.title.x = element_blank())
-```
 
-<div class="figure" style="text-align: center">
-<img src="figure/recent-development-fx-1.png" alt="plot of chunk recent-development-fx" width="100%" />
-<p class="caption">plot of chunk recent-development-fx</p>
-</div>
+```
