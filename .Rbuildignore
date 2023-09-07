@@ -9,3 +9,4 @@
 ^pre-submission.R$
 ^\.github$
 ^codecov\.yml$
+^CITATION\.cff$

@@ -2,8 +2,11 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/jla-data/czechrates/workflows/R-CMD-check/badge.svg)](https://github.com/jla-data/czechrates/actions) [![Codecov test coverage](https://codecov.io/gh/jla-data/czechrates/branch/master/graph/badge.svg)](https://codecov.io/gh/jla-data/czechrates?branch=master) [![CRAN](http://www.r-pkg.org/badges/version/czechrates)](https://cran.r-project.org/package=czechrates) [![Downloads-total](http://cranlogs.r-pkg.org/badges/grand-total/czechrates?color=brightgreen)](https://www.r-pkg.org:443/pkg/czechrates) [![Downloads-weekly](http://cranlogs.r-pkg.org/badges/last-week/czechrates?color=brightgreen)](https://www.r-pkg.org:443/pkg/czechrates)
-
+[![R-CMD-check](https://github.com/jla-data/czechrates/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jla-data/czechrates/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/jla-data/czechrates/branch/master/graph/badge.svg)](https://codecov.io/gh/jla-data/czechrates?branch=master) [![CRAN](http://www.r-pkg.org/badges/version/czechrates)](https://cran.r-project.org/package=czechrates)
+[![CRAN-checks](https://badges.cranchecks.info/worst/czechrates.svg)](https://cran.r-project.org/web/checks/check_results_czechrates.html)
+[![Downloads-total](http://cranlogs.r-pkg.org/badges/grand-total/czechrates?color=brightgreen)](https://www.r-pkg.org:443/pkg/czechrates) 
+[![Downloads-weekly](http://cranlogs.r-pkg.org/badges/last-week/czechrates?color=brightgreen)](https://www.r-pkg.org:443/pkg/czechrates)
 <!-- badges: end -->
 
 The package `{czechrates}` provides a convenient way to access the information stored on the ČNB website from the comfort of your R session. It does not store the rates (this would be against the terms of use, and the data would get stale rather soon).

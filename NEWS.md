@@ -1,3 +1,7 @@
+## version 0.2.3
+  
+  - minor update of DESCRIPTION (Authors@R format)
+
 ## version 0.2.2
 
   - minor update of encoding related issues (CRAN check fail)

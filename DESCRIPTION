@@ -1,13 +1,17 @@
 Package: czechrates
 Type: Package
 Title: Czech Interest & Foreign Exchange Rates
-Version: 0.2.2
+Version: 0.2.3
 Date: 
-  2021-05-25
-Author: 
-  Jindra Lacko
-Maintainer: 
-  Jindra Lacko <jindra.lacko@gmail.com>
+  2022-09-23
+Authors@R: c(
+    person(given = "Jindra", 
+           family = "Lacko", 
+           email = "jindra.lacko@gmail.com", 
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-0375-5156"))
+    )
+Maintainer: Jindra Lacko <jindra.lacko@gmail.com>
 Description:
   Interface to interest and foreign exchange rates published by the Czech National Bank.
 URL: https://github.com/jla-data/czechrates
@@ -29,5 +33,5 @@ Suggests:
   scales,
   knitr,
   covr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 VignetteBuilder: knitr
