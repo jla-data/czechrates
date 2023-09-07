@@ -13,7 +13,10 @@
 #' @return data frame - first column is date, second is relevant two-week repo rate (the primary CZK policy rate)
 #' @export
 #'
-#' @examples repo2w(as.Date("2002-08-12"))
+#' @examples
+#' \donttest{
+#'   repo2w(as.Date("2002-08-12"))
+#' }
 #'
 repo2w <- function(date = Sys.Date() - 1) {
 

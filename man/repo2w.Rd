@@ -23,6 +23,8 @@ Repo rates are reported as fractions, i.e. not as percentages (i.e. 1\% is repor
 A single result will be reported for all dates higher than December 8th, 1995.
 }
 \examples{
-repo2w(as.Date("2002-08-12"))
+\donttest{
+  repo2w(as.Date("2002-08-12"))
+}
 
 }

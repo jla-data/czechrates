@@ -8,9 +8,10 @@
 #' @return a data frame - date_valid, currency ISO code, quoted amount, rate
 #' @export
 #'
-#' @examples cnbfxrate(as.Date("2002-08-12"), "EUR") # EUR/CZK rate for August 12th, 2002
-#'
-#'
+#' @examples
+#' \donttest{
+#'   cnbfxrate(as.Date("2002-08-12"), "EUR") # EUR/CZK rate for August 12th, 2002
+#' }
 #'
 
 # exported function

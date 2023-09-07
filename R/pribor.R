@@ -16,8 +16,10 @@
 #' @return data frame - first column is date, second is relevant PRIBOR rate.
 #' @export
 #'
-#' @examples pribor(as.Date("2002-08-12"), "1D")
-#'
+#' @examples
+#' \donttest{
+#'   pribor(as.Date("2002-08-12"), "1D")
+#' }
 
 
 

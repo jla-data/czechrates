@@ -25,6 +25,7 @@ PRIBOR rates are reported as fractions, i.e. not as percentages (i.e. 1\% is rep
 For dates when no PRIBOR was quoted (e.g. weekends, Bank Holidays, such as December 24th on any year, or August 13th, 2002 when no PRIBOR was quoted due to catastrophic floods) no result will be returned.
 }
 \examples{
-pribor(as.Date("2002-08-12"), "1D")
-
+\donttest{
+  pribor(as.Date("2002-08-12"), "1D")
+}
 }
