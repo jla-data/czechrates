@@ -1,6 +1,6 @@
 ## version 0.2.4 (2023-09-09)
 
- - minor update to resolve CRAN findings / failures of API wrapping code in CI settings
+ - minor update to resolve CRAN check issues
 
 ## version 0.2.3
   

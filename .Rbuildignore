@@ -12,3 +12,4 @@
 ^CITATION\.cff$
 ^generate-vignette.R$
 ^vignette.Rmd.orig$
+^CRAN-SUBMISSION$
