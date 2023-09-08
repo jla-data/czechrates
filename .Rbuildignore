@@ -11,5 +11,4 @@
 ^codecov\.yml$
 ^CITATION\.cff$
 ^generate-vignette.R$
-vignettes\vignette.Rmd.orig
-vignettes\figure\*
+^vignette.Rmd.orig$

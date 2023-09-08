@@ -16,7 +16,7 @@ knitr::opts_chunk$set(collapse = T,
                       out.width = "100%",
                       fig.width = 8,
                       fig.height = 4,
-                      fig.path = "./vignettes/")
+                      fig.path = "./")
 ```
 
 ## PRIBOR - PRague InterBank Offered Rate
@@ -66,7 +66,7 @@ offered_rate <- pribor(seq(from = as.Date("1997-05-01"),
                            by = 1))
 
 ggplot(data = offered_rate, aes(x = date_valid, y = PRIBOR_1D)) +
-  geom_line(color = "red", size = 1.25) +
+  geom_line(color = "red", linewidth = 1.25) +
   scale_x_date(date_labels = "%d.%m.%Y") +
   scale_y_continuous(labels = percent_format()) +
   theme_bw() +
@@ -105,7 +105,7 @@ policy_rate <- repo2w(seq(from = as.Date("2020-01-01"),
                           by = 1))
 
 ggplot(data = policy_rate, aes(x = date_valid, y = REPO_2W)) +
-  geom_line(color = "red", size = 1.25) +
+  geom_line(color = "red", linewidth = 1.25) +
   scale_x_date(date_labels = "%d.%m.%Y") +
   scale_y_continuous(labels = percent_format()) +
   theme_bw() +
@@ -154,7 +154,7 @@ euro_rate <- cnbfxrate(seq(from = as.Date("2020-01-01"),
                        "EUR")
 
 ggplot(data = euro_rate, aes(x = date_valid, y = rate)) +
-  geom_line(color = "red", size = 1.25) +
+  geom_line(color = "red", linewidth = 1.25) +
   scale_x_date(date_labels = "%d.%m.%Y") +
   scale_y_continuous(labels = dollar_format(prefix = "",
                                             suffix = " CZK",

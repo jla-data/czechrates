@@ -20,13 +20,14 @@ cnbfxrate <- function(date = Sys.Date() - 1,
 
   cnb <- as.logical(Sys.getenv("CNB_UP", unset = TRUE)) # dummy variable to allow testing of network
 
+  # a quick reality check:
+  if(!inherits(date, "Date")) stop("'date' parameter expected as a Date data type!")
+
   if (!ok_to_proceed("https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/") | !cnb) { # CNB website down
     message("Data source broken.")
     return(NULL)
   }
 
-  # a quick reality check:
-  if(!inherits(date, "Date")) stop("'date' parameter expected as a Date data type!")
 
   roky <- format(date, "%Y") %>%
     unique()

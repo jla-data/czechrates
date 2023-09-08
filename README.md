@@ -3,7 +3,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/jla-data/czechrates/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jla-data/czechrates/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/jla-data/czechrates/branch/master/graph/badge.svg)](https://codecov.io/gh/jla-data/czechrates?branch=master) [![CRAN](http://www.r-pkg.org/badges/version/czechrates)](https://cran.r-project.org/package=czechrates)
+[![Codecov test coverage](https://codecov.io/gh/jla-data/czechrates/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jla-data/czechrates?branch=master) [![CRAN](http://www.r-pkg.org/badges/version/czechrates)](https://cran.r-project.org/package=czechrates)
 [![CRAN-checks](https://badges.cranchecks.info/worst/czechrates.svg)](https://cran.r-project.org/web/checks/check_results_czechrates.html)
 [![Downloads-total](http://cranlogs.r-pkg.org/badges/grand-total/czechrates?color=brightgreen)](https://www.r-pkg.org:443/pkg/czechrates) 
 [![Downloads-weekly](http://cranlogs.r-pkg.org/badges/last-week/czechrates?color=brightgreen)](https://www.r-pkg.org:443/pkg/czechrates)

@@ -28,14 +28,14 @@ pribor <- function(date = Sys.Date() - 1, maturity = "1D") {
 
   cnb <- as.logical(Sys.getenv("CNB_UP", unset = TRUE)) # dummy variable to allow testing of network
 
+  # a quick reality check:
+  if(!inherits(date, "Date")) stop("'date' parameter expected as a Date data type!")
+  if(!all(maturity %in% c("1D", "1W", "2W", "1M", "3M", "6M", "9M", "1Y"))) stop(paste0("'", maturity, "' is not a recognized maturity abbreviation!"))
+
   if (!ok_to_proceed("https://www.cnb.cz/en/financial-markets/money-market/pribor/fixing-of-interest-rates-on-interbank-deposits-pribor/year.txt") | !cnb) { # CNB website down
     message("Data source broken.")
     return(NULL)
   }
-
-  # a quick reality check:
-  if(!inherits(date, "Date")) stop("'date' parameter expected as a Date data type!")
-  if(!all(maturity %in% c("1D", "1W", "2W", "1M", "3M", "6M", "9M", "1Y"))) stop(paste0("'", maturity, "' is not a recognized maturity abbreviation!"))
 
   roky <- format(date, "%Y") %>%
     unique()

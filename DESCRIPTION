@@ -3,7 +3,7 @@ Type: Package
 Title: Czech Interest & Foreign Exchange Rates
 Version: 0.2.4
 Date: 
-  2024-09-09
+  2023-09-09
 Authors@R: c(
     person(given = "Jindra", 
            family = "Lacko", 

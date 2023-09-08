@@ -3,6 +3,7 @@
 library(knitr)
 system("rm ./vignettes/vignette.Rmd")
 system("rm -rf ./vignettes/*.png")
-knit("./vignettes/vignette.Rmd.orig",
+knit("./vignette.Rmd.orig",
      output = "./vignettes/vignette.Rmd")
+system("mv ./*.png ./vignettes/")
 
