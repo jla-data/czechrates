@@ -93,7 +93,7 @@ repo2w(three_dates)
 
 ```
 
-To ilustrate the development of the main policy rate – i.e. `czechrates::repo2w()` – we can consider a more recent history:
+To illustrate the development of the main policy rate – i.e. `czechrates::repo2w()` – we can consider a more recent history:
 
 ```{r recent-development-ir}
 library(czechrates)

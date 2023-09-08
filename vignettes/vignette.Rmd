@@ -118,7 +118,7 @@ repo2w(three_dates)
 ## 3 2020-05-13  0.0025
 ```
 
-To ilustrate the development of the main policy rate – i.e. `czechrates::repo2w()` – we can consider a more recent history:
+To illustrate the development of the main policy rate – i.e. `czechrates::repo2w()` – we can consider a more recent history:
 
 
 ```r
