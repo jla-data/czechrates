@@ -58,7 +58,7 @@ repo2w <- function(date = Sys.Date() - 1) {
                          fake = 1) %>%
     tibble::as_tibble()
 
-  res <- dplyr::full_join(calendar, res, by = "fake") %>%
+  res <- dplyr::full_join(calendar, res, by = "fake", relationship = "many-to-many") %>%
     dplyr::select(-fake) %>%
     dplyr::filter(valid_to >= date_valid & valid_from < date_valid) %>%
     dplyr::filter(date_valid %in% date) %>%
