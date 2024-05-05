@@ -2,6 +2,7 @@
 % Please edit documentation in R/czechrates.R
 \docType{package}
 \name{czechrates-package}
+\alias{-package}
 \alias{czechrates-package}
 \title{czechrates: Czech Interest Rates}
 \description{

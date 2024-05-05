@@ -1,3 +1,7 @@
+## version 0.2.5 (2024-05-06)
+
+ - minor update to resolve issues due to updated format of raw CNB dataset
+
 ## version 0.2.4 (2023-09-09)
 
  - minor update to resolve CRAN check issues

@@ -66,7 +66,7 @@ dnl_fx <- function(year) {
 
   raw_file <- readLines(local_file) # to obtain header rows
 
-  useky <- c(grep("Datum*", raw_file), length(raw_file)+1) # location of header rows + the end
+  useky <- c(grep("Date", raw_file), length(raw_file)+1) # location of header rows + the end
 
   for (i in 1:(length(useky)-1)) {
 
